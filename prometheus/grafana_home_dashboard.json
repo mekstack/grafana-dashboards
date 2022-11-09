@@ -1,4 +1,8 @@
 {
+  "dashboard": {
+      "annotations": {
+            "list": []
+        },
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
