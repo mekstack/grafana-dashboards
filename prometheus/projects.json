@@ -1,56 +1,12 @@
 {
-  "dashboard": {
-     "annotations": {
-        "list": []
-  },
-  "__inputs": [
-    {
-      "name": "Prometheus",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": [],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.4.3"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -68,13 +24,16 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": null,
-  "iteration": 1648221577203,
+  "id": 7,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -84,6 +43,15 @@
       "id": 6,
       "panels": [],
       "repeat": "instance",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Instance $instance",
       "type": "row"
     },
@@ -188,7 +156,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -196,7 +164,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "libvirt_domain_info_vstate * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "libvirt_domain_info_vstate * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "instant": true,
           "interval": "",
           "legendFormat": " ",
@@ -217,6 +185,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 0.1,
@@ -269,8 +239,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -284,7 +255,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_info_cpu_time_seconds_total[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_info_cpu_time_seconds_total[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "CPU Load",
@@ -305,6 +276,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 1000,
@@ -382,8 +355,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -397,7 +371,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_interface_stats_transmit_bytes_total[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_interface_stats_transmit_bytes_total[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -410,13 +384,14 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_interface_stats_receive_bytes_total[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_interface_stats_receive_bytes_total[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "down",
           "refId": "C"
         }
       ],
+      "title": "Network. (Removed)",
       "transparent": true,
       "type": "timeseries"
     },
@@ -431,6 +406,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 20000,
@@ -509,8 +486,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -525,7 +503,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_block_stats_read_bytes_total[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_block_stats_read_bytes_total[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "interval": "",
           "legendFormat": "read",
           "refId": "A"
@@ -536,7 +514,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_block_stats_write_bytes_total[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_block_stats_write_bytes_total[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "write",
@@ -557,6 +535,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 1,
@@ -634,8 +614,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -650,7 +631,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_block_stats_read_requests_total{target_device=\"vda\"}[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_block_stats_read_requests_total{target_device=\"vda\"}[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "interval": "",
           "legendFormat": "read",
           "refId": "A"
@@ -661,7 +642,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "rate(libvirt_domain_block_stats_write_requests_total{target_device=\"vda\"}[2m]) * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "rate(libvirt_domain_block_stats_write_requests_total{target_device=\"vda\"}[2m]) * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "write",
@@ -740,7 +721,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.4.3",
+      "pluginVersion": "9.5.2",
       "targets": [
         {
           "datasource": {
@@ -748,7 +729,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "sum(libvirt_domain_block_stats_capacity_bytes{target_device=\"vda\"} * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"})",
+          "expr": "sum(libvirt_domain_block_stats_capacity_bytes{target_device=\"vda\"} * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"}))",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -763,7 +744,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": false,
-          "expr": "sum(libvirt_domain_block_stats_allocation{target_device=\"vda\"} * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"})",
+          "expr": "sum(libvirt_domain_block_stats_allocation{target_device=\"vda\"} * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"}))",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -799,6 +780,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -901,8 +884,9 @@
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -916,7 +900,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "(libvirt_domain_memory_stats_available_bytes * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}) - (libvirt_domain_memory_stats_usable_bytes * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"})",
+          "expr": "(libvirt_domain_memory_stats_available_bytes * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})) - (libvirt_domain_memory_stats_usable_bytes * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"}))",
           "hide": false,
           "interval": "",
           "legendFormat": "used",
@@ -928,7 +912,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "libvirt_domain_memory_stats_disk_cache_bytes * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "libvirt_domain_memory_stats_disk_cache_bytes * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
@@ -941,7 +925,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "libvirt_domain_memory_stats_available_bytes * on(domain) group_left(instance_name) libvirt_domain_info_meta{instance_name=\"$instance\"}",
+          "expr": "libvirt_domain_memory_stats_available_bytes * on(domain) group_left(instance_name) topk(1, libvirt_domain_info_meta{instance_name=\"$instance\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "available",
@@ -952,14 +936,36 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 35,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "admin",
+          "value": "admin"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -981,7 +987,15 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
@@ -1005,14 +1019,13 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "projects",
   "uid": "ysqRegynk",
-  "version": 42,
+  "version": 6,
   "weekStart": ""
-  }
 }
