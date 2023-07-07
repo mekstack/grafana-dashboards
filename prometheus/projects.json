@@ -1,4 +1,5 @@
 {
+  "dashboard": {
   "annotations": {
     "list": [
       {
@@ -1025,10 +1026,8 @@
   "timepicker": {},
   "timezone": "",
   "title": "projects",
-  "dashboard": {
-    "title" : "projects"
-  },
   "uid": "ysqRegynk",
   "version": 6,
   "weekStart": ""
+  }
 }

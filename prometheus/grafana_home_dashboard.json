@@ -1,4 +1,5 @@
 {
+  "dashboard": {
   "annotations": {
     "list": [
       {
@@ -3488,11 +3489,9 @@
     ]
   },
   "timezone": "Europe/Moscow",
-  "dashboard": {
-    "title" : "projects"
-  },
-  "title": "mekstack",
+  "title": "mekstack_home",
   "uid": "YZCsB1Qmz",
   "version": 10,
   "weekStart": ""
+  }
 }
