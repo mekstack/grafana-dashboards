@@ -1,5 +1,4 @@
 {
-  "dashboard": {
   "annotations": {
     "list": [
       {
@@ -27,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 9701,
   "graphTooltip": 1,
-  "id": null,
+  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -136,7 +135,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -259,7 +258,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -367,7 +366,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -449,7 +448,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -531,7 +530,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -614,7 +613,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -691,17 +690,19 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(haproxy_backend_up - 1)",
           "interval": "",
           "legendFormat": "{{ backend }}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -768,7 +769,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -853,7 +854,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -940,7 +941,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1072,7 +1073,7 @@
         "text": {},
         "textMode": "value"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1122,7 +1123,7 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "decmbytes"
         },
         "overrides": [
           {
@@ -1162,15 +1163,16 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(openstack_nova_limits_memory_max) - sum(openstack_nova_limits_memory_used)",
+          "expr": "sum(openstack_nova_limits_memory_max{tenant=\"admin\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1184,8 +1186,9 @@
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(openstack_nova_limits_memory_used)",
+          "expr": "sum(openstack_nova_limits_memory_used{tenant=\"admin\"})",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -1286,7 +1289,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1393,7 +1396,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1433,6 +1436,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           },
@@ -1446,7 +1453,7 @@
         "x": 6,
         "y": 5
       },
-      "id": 163,
+      "id": 8,
       "links": [],
       "options": {
         "colorMode": "value",
@@ -1460,26 +1467,26 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "exemplar": true,
-          "expr": "sum(openstack_glance_images)",
+          "exemplar": false,
+          "expr": "sum(openstack_nova_total_vms)",
           "format": "time_series",
+          "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "running vms",
           "refId": "A"
         }
       ],
-      "title": "Glance Images",
+      "title": "Instances",
       "transparent": true,
       "type": "stat"
     },
@@ -1501,10 +1508,13 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
@@ -1514,7 +1524,7 @@
         "x": 8,
         "y": 5
       },
-      "id": 140,
+      "id": 34,
       "links": [],
       "options": {
         "colorMode": "value",
@@ -1528,10 +1538,9 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1539,7 +1548,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "avg(openstack_loadbalancer_total_loadbalancers)",
+          "expr": "sum(openstack_identity_users)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1547,7 +1556,7 @@
           "refId": "A"
         }
       ],
-      "title": "Loadbalancers",
+      "title": "Users",
       "transparent": true,
       "type": "stat"
     },
@@ -1596,7 +1605,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1659,7 +1668,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -1701,6 +1710,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -1809,6 +1819,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1963,7 +1974,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -2004,10 +2015,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -2021,7 +2028,7 @@
         "x": 2,
         "y": 9
       },
-      "id": 8,
+      "id": 163,
       "links": [],
       "options": {
         "colorMode": "value",
@@ -2035,26 +2042,26 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "exemplar": false,
-          "expr": "sum(openstack_nova_total_vms)",
+          "exemplar": true,
+          "expr": "sum(openstack_glance_images)",
           "format": "time_series",
-          "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "running vms",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Instances",
+      "title": "Glance Images",
       "transparent": true,
       "type": "stat"
     },
@@ -2076,13 +2083,10 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          }
+          },
+          "unit": "short"
         },
         "overrides": []
       },
@@ -2092,7 +2096,7 @@
         "x": 4,
         "y": 9
       },
-      "id": 34,
+      "id": 140,
       "links": [],
       "options": {
         "colorMode": "value",
@@ -2106,9 +2110,10 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -2116,7 +2121,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "exemplar": true,
-          "expr": "sum(openstack_identity_users)",
+          "expr": "avg(openstack_loadbalancer_total_loadbalancers)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2124,7 +2129,7 @@
           "refId": "A"
         }
       ],
-      "title": "Users",
+      "title": "Loadbalancers",
       "transparent": true,
       "type": "stat"
     },
@@ -2176,87 +2181,25 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "avg(openstack_identity_projects)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
+          "range": true,
           "refId": "A"
         }
       ],
       "title": "Projects",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 8,
-        "y": 9
-      },
-      "id": 162,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "exemplar": false,
-          "expr": "sum(openstack_neutron_routers)",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Routers",
       "transparent": true,
       "type": "stat"
     },
@@ -2305,7 +2248,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -2369,7 +2312,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -2433,7 +2376,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -2504,6 +2447,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2600,6 +2544,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2723,6 +2668,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -2848,6 +2794,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3116,7 +3063,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -3211,7 +3158,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
@@ -3239,7 +3186,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 66
       },
       "id": 47,
       "panels": [],
@@ -3280,6 +3227,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -3327,9 +3275,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 24,
+        "w": 12,
         "x": 0,
-        "y": 22
+        "y": 67
       },
       "id": 42,
       "maxPerRow": 2,
@@ -3394,15 +3342,16 @@
         "current": {
           "selected": false,
           "text": "Prometheus",
-          "value": "Prometheus"
+          "value": "b2fd7e6d-0d07-4277-a9b5-b5eda29bcffc"
         },
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "datasource",
         "multi": false,
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -3410,9 +3359,13 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "cmp01",
-          "value": "cmp01"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
@@ -3420,8 +3373,8 @@
         },
         "definition": "label_values(Hostname)",
         "hide": 0,
-        "includeAll": false,
-        "multi": false,
+        "includeAll": true,
+        "multi": true,
         "name": "node",
         "options": [],
         "query": {
@@ -3436,18 +3389,22 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "10.228.8.41:9100",
-          "value": "10.228.8.41:9100"
+          "selected": true,
+          "text": [
+            "None"
+          ],
+          "value": [
+            ""
+          ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(node_uname_info{nodename=\"$node\"},instance)",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
-        "multi": false,
+        "multi": true,
         "name": "name_mapping",
         "options": [],
         "query": {
@@ -3491,7 +3448,6 @@
   "timezone": "Europe/Moscow",
   "title": "mekstack_home",
   "uid": "YZCsB1Qmz",
-  "version": 10,
+  "version": 7,
   "weekStart": ""
-  }
 }
